@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title> reelyActive: Hyperlocal Context </title>
+        <link rel="stylesheet" href="style/main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+        <script type="text/javascript" src="http://code.angularjs.org/1.2.0/angular-resource.js"></script>
+        <script type="text/javascript" src="reely.js"></script>
+    </head>
+    <body ng-app="ReelyActive">
+    <div ng-controller="HLCController as hlc">
+        <div id="search">
+            <a href='.'><img id="logo" src="images/logo.png"></a>
+            <input type='text' ng-model='searchLinkKey' class="large" placeholder="Put an url (with http://), an id or a place name here" /><button id='searchButton' ng-click='doLinkSearch()'>Search</button>
+            <p>or</p>
+            <textarea ng-model='searchTextKey' class="large">Put your JSON code here</textarea><button id='searchButton' ng-click='doTextSearch()'>Search</button>
+            <p ng-repeat="response in reelySearchResult"></p>
+            <div class='content'>
+                <devices></devices>
+            </div>
+        </div>
+    <footer><a href="admin"> Admin interface </a> &nbsp; | &nbsp;  Learn more at <a href="http://context.reelyactive.com/context.html"> context.reelyactive.com </a> </footer>
+    <script type="text/javascript" src="tools.js"></script>
+    </body>
+</html>

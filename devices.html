@@ -1,0 +1,22 @@
+<div class='device' ng-repeat="device in requestResult.devices">
+    <div class='main-info'>
+        <span>{{ device.identifier.value }} ({{ device.identifier.type }})</span>
+	<br />
+        <a href='{{ device.href }}' class='href-link' target='_blank'>Link to Context</a>
+    </div>
+    <br />
+    <div>
+    	<div class='identity-container half-width'>
+    		<p ng-click='deviceCtrl.getIdentity( device );device.showIdentity = !device.showIdentity'>
+			<span ng-show='!device.showIdentity'>></span><span ng-show='device.showIdentity'>x</span> Metadata (via url)</p>
+    	    <identity-layout ng-show='device.showIdentity'></identity-layout>
+    	</div>
+    	<div class='extras-container half-width'>
+    	    <p ng-click='device.showExtras = !device.showExtras ;' >
+	    <span ng-show='device.showExtras != true'>></span><span ng-show='device.showExtras == true'>x</span> Identifier Extras</p>
+    	    <extras-layout class='extras'></extras-layout>
+    	</div>
+    </div>
+    <span class='clear'> </span>
+</div>
+

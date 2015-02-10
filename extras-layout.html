@@ -1,0 +1,16 @@
+<div class='extras' ng-show='device.showExtras'>
+    <div onClick='renderJSON(this.children[0]); this.children[0].setAttribute("class", "ng-show");'>JSON<span class='ng-hide'>{{ device.identifier }}</span></div>
+    <div ng-show='device.identifier.flags' onClick='renderJSON( this )'>Flags: {{ device.identifier.flags }}</div>
+    <div ng-show='device.identifier.advHeader' onClick='renderJSON( this )'>Header: {{ device.identifier.advHeader }}</div>
+    <div ng-show='device.identifier.advData'>Data: 
+	<div onClick='renderJSON( this )'>{{ device.identifier.advData }}</div>
+	<div ng-show='device.identifier.advData'>
+	    <div ng-show='device.identifier.advData.flags'>Flags: 
+		<div onClick='renderJSON( this )'>{{ device.identifier.advData.flags }}</div>
+	    </div>
+	    <div ng-show='device.identifier.advData.manufacturerSpecificData'>Manufacturer: 
+		<div onClick='renderJSON( this )'>{{ device.identifier.advData.manufacturerSpecificData }}</div>
+	    </div>
+	</div>
+    </div>
+</div>

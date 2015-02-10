@@ -1,0 +1,42 @@
+<div class='identity' ng-show='device.identity != undefined'>
+    <div onClick='renderJSON(this.children[0]); this.children[0].setAttribute("class", "ng-show");'>JSON<span class='ng-hide'>{{ device.identity }}</span></div>
+    <div class='identity-card card' ng-show='device.identity.person' title='Person'>
+	<img ng-show='device.identity.person.portraitImageUrl != undefined' ng-src='{{ device.identity.person.portraitImageUrl }}' />
+	    <h2>{{ device.identity.person.firstName }} {{ device.identity.person.lastName }}</h2>
+        <div class='icon social' ng-show='device.identity.person.linkedInPublicUrl'>
+            <a href='{{ device.identity.person.linkedInPublicUrl }}' target='_blank'>&#62232;</a>
+        </div>
+        <div class='icon social' ng-show='device.identity.person.googlePlusProfileName'>
+            <a href='http://plus.google.com/{{ device.identity.person.googlePlusProfileName }}' target='_blank'>&#62223;</a>
+        </div>
+        <div class='icon' ng-show='device.identity.person.retailUrl'>
+            <a href='{{ device.identity.person.retailUrl }}' target='_blank'>&#59197;</a>
+        </div>
+        <div class='icon social' ng-show='device.identity.person.soundcloudUsername'>
+            <a href='http://soundcloud.com/{{ device.identity.person.soundcloudUsername }}' target='_blank'>&#62280;</a>
+        </div>
+        <div class='icon social' ng-show='device.identity.person.twitterPersonalScreenName'>
+            <a href='http://www.twitter.com/{{ device.identity.person.twitterPersonalScreenName }}' target='_blank'>&#62217;</a>
+        </div>
+        <div ng-show='device.identity.person.companyTitle'>
+            <span class='icon' >&#128710;</span>{{ device.identity.person.companyTitle }}
+        </div>
+        <div ng-show='device.identity.person.blogUrl'>
+            <a href='{{ device.identity.person.blogUrl }}'><span class='icon'>&#127758;</span>{{ device.identity.person.blogUrl }}</a>
+        </div>
+        <div ng-show='device.identity.person.defaultMessage'>
+            <span class='icon'>&#59160;</span>{{ device.identity.person.defaultMessage }}
+        </div>
+	<br class="clear" />
+    </div>
+    <div class='clear company-card card' ng-show='device.identity.person.companyName || device.identity.person.companyLogoUrl' title='Company'>
+	<img ng-show='device.identity.person.companyLogoUrl != undefined' ng-src='{{ device.identity.person.companyLogoUrl }}' />{{ device.identity.person.companyName }}
+	<br class='clear' />
+    </div>
+    <div class='clear device-card card' onClick='renderJSON(this)' ng-show='device.identity.device' title='device'>
+	<img ng-show='device.identity.device.portraitImageUrl' src='{{ device.identity.device.portraitImageUrl }}' />
+	<div ng-show='device.identity.device.manufacturer'>Manufacturer: {{ device.identity.device.manufacturer }}</div>
+	<div ng-show='device.identity.device.model'>Model: {{ device.identity.device.model }}</div>
+	<br class='clear' />
+    </div>
+</div>
