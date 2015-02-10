@@ -11,9 +11,9 @@
     <div ng-controller="HLCController as hlc">
         <div id="search">
             <a href='.'><img id="logo" src="images/logo.png"></a>
-            <input type='text' ng-model='searchLinkKey' class="large" placeholder="Put an url (with http://), an id or a place name here" /><button id='searchButton' ng-click='doLinkSearch()'>Search</button>
+            <input type='text' ng-model='searchLinkKey' class="large" placeholder="Put an url (with http://), an id or a place name here" /><button id='searchLinkButton' ng-click='doLinkSearch()'>Search</button>
             <p>or</p>
-            <textarea ng-model='searchTextKey' class="large">Put your JSON code here</textarea><button id='searchButton' ng-click='doTextSearch()'>Search</button>
+            <textarea ng-model='searchJSONKey' class="large">Put your JSON code here</textarea><button id='searchJSONButton' ng-click='doJSONSearch()'>Search</button>
             <p ng-repeat="response in reelySearchResult"></p>
             <div class='content'>
                 <devices></devices>

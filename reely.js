@@ -7,7 +7,7 @@ app.controller( "HLCController", function( $scope, $resource ){
     
     // To search, we bind the input text field and the model 'searchKey'
     $scope.doLinkSearch = function() {
-	document.getElementById( 'searchButton' ).innerHTML += "<img id='loader' src='images/loader.gif' />";
+	document.getElementById( 'searchLinkButton' ).innerHTML += "<img id='loader' src='images/loader.gif' />";
         var searchKey = $scope.searchLinkKey;
         if ( searchKey != undefined ){
             if ( searchKey.length === 12 )
@@ -21,7 +21,14 @@ app.controller( "HLCController", function( $scope, $resource ){
             console.log( "Couldn't find search key : sending default." );
             $scope.requestResult = $scope.reelySearch.get();
         } 
-	console.log( $scope.requestResult );
+	document.getElementById( "search" ).setAttribute( "class", "searched" );
+	var element = document.getElementById( "loader" );
+	element.parentElement.removeChild( element );
+    }
+
+    $scope.doJSONSearch = function() {
+	document.getElementById( 'searchJSONButton' ).innerHTML += "<img id='loader' src='images/loader.gif' />";
+        $scope.requestResult = JSON.parse( $scope.searchJSONKey );
 	document.getElementById( "search" ).setAttribute( "class", "searched" );
 	var element = document.getElementById( "loader" );
 	element.parentElement.removeChild( element );
