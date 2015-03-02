@@ -130,6 +130,27 @@ var Person = React.createClass({
     }
 });
 
+var Product = React.createClass({
+    getDefaultProps: function() {
+        return {
+            "@id": "http://product",
+            "@type": "Product",
+            "model": "RA-T411",
+            "manufacturer": "http://reelyactive.com/???" 
+        }
+    },
+    render: function() {
+        return (
+        <div class="person">
+            <h1>
+                Product : { this.props.model }
+            </h1>
+            <p>Manufacterer : { this.props.manufacturer }</p>  
+        </div>
+        );
+    }
+});
+
 React.render(
   <Device>
   </Device>,
