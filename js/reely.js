@@ -40,11 +40,11 @@ var Device = React.createClass({
     },
     render: function() {
         return (
-            <div class="device">
+            <div className="device">
                 <h1>{ this.props.id }</h1>
                 <Tiraid data={ this.props.tiraid } />
-                <p>url : <a target="_blank">{ this.props.links.url }</a></p>
-                <p>href : <a target="_blank">{ this.props.links.href }</a></p>
+                <p>url : <a target="_blank" href="{ this.props.links.url }">{ this.props.links.url }</a></p>
+                <p>href : <a target="_blank" href="{ this.props.links.href }">{ this.props.links.href }</a></p>
             </div>
         );
     }
@@ -73,27 +73,27 @@ var Tiraid = React.createClass({
         };
     },
     render: function() {
-        return (<div class="tiraid">
+        return (<div className="tiraid">
         <div>
-            { this.props.identifier.type }{ this.props.identifier.value }
+            { this.props.identifier.type } - { this.props.identifier.value }
         </div>
         <div>
             <h5>
-                <img class="icon" src="http://context.reelyactive.com/images/context-identification.png" />
+                <img className="icon" src="http://context.reelyactive.com/images/context-identification.png" />
                 ID Details
             </h5>
             <p>{ this.props.identifier.flags }</p>
         </div>
         <div>
             <h5>
-                <img class="icon" src="http://context.reelyactive.com/images/context-time.png" />
+                <img className="icon" src="http://context.reelyactive.com/images/context-time.png" />
                 Timestamp Details
             </h5>
             <p>{ this.props.timestamp }</p>
         </div>
         <div>
             <h5>
-                <img class="icon" src="http://context.reelyactive.com/images/context-location.png" />
+                <img className="icon" src="http://context.reelyactive.com/images/context-location.png" />
                 Location Details
             </h5>
             <p>{ this.props.radioDecodings }</p>
@@ -115,12 +115,12 @@ var Person = React.createClass({
     },
     render: function() {
         return (
-        <div class="person">
+        <div className="person">
             <h1>
                 { this.props.name }
             </h1>
             <div>
-                <img class="icon" src={this.props.image} />
+                <img className="icon" src={this.props.image} />
                 <p>Contact at { this.props.email }</p>
                 <p>Alumni of { this.props.alumniOf }</p>  
                 <p>Owns : <Product url={ this.props.owns } /></p>  
@@ -141,7 +141,7 @@ var Product = React.createClass({
     },
     render: function() {
         return (
-        <div class="person">
+        <div className="product">
             <h1>
                 Product : { this.props.model }
             </h1>
