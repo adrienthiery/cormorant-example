@@ -243,6 +243,6 @@ var Product = React.createClass({
 
 React.render(
   <HLC url='test.json' />,
-  document.getElementById('device')
+  document.getElementById('content')
 );
 
