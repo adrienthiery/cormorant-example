@@ -1,144 +1,226 @@
-var JSONobj = React.createClass({
-  getDefaultProps: function() {
-    return {
-      data: '{}'
-    };
-  },
-  render: function () {
-    //Use all the types defined hereafter
-    return (<div></div>);
-  }
+var HLC = React.createClass({
+    getDefaultProps: function(){
+        return {};
+    },
+    getInitialState: function() {
+        return {data: {}};
+    },
+    componentDidMount: function() {
+    $.ajax({
+        url: this.props.url,
+        dataType: 'json',
+        success: function(data) {
+            this.setState({data: data});
+        }.bind(this),
+        error: function(xhr, status, err) {
+            console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+    },
+    render: function() {
+        return ( <Devices data={ this.state.data.devices } /> );
+    }
 });
-
 
 // Add mechanics of put JSON or Url in inputs => render
 // + Put url as URL parameters => render
+var Devices = React.createClass({
+    getDefaultProps: function() {
+        return {
+            'data' : {}
+        };
+    },
+    render: function() {
+        var myData = this.props.data;
+        var nodes = Object.keys(this.props.data).map(function(key) {
+            return (<Device data={ myData[key] } />)
+        });
+        return (<div className="devices">{ nodes }</div>)
+    }
+});
 
 var Device = React.createClass({
     getDefaultProps: function(){
         return {
-            "id" : "001bc50940100069",
+            "data" : {
+            "id" : "xxxxxxxxxxxxxxxx",
             "tiraid" : {
                 "identifier": {
-                    "type":"EUI-64",
-                    "value":"001bc50940100069",
+                    "type":"TYPE",
+                    "value":"xxxxxxxxxxxxxxxx",
                     "flags":{
-                        "transmissionCount":1
+                        "transmissionCount": 99
                     }
                 },
-                "timestamp":"2015-03-02T21:46:07.014Z",
+                "timestamp":"20yy-mm-ddThh:ii:ss.xxxx",
                 "radioDecodings":
                     [{
-                        "rssi":111,
+                        "rssi": 99,
                         "identifier":{
-                            "type":"EUI-64",
-                            "value":"001bc5094080001a"
+                            "type":"TYPE",
+                            "value":"xxxxxxxxxxxxxxxx"
                         }
                     }]
             },
-            "links" : {
-                "url":"http://reelyactive.com/metadata/001bc50940100069.json",
-                "href":"http://www.hyperlocalcontext.com/id/001bc50940100069"
-            },
+            "url":"http://reelyactive.com/metadata/xxxxxxxxxxx.json",
+            "href":"http://www.hyperlocalcontext.com/id/xxxxxxxxxxxxxxxx",
+            }
         }
-    },
-    componentDidMount : function() {
-        // Urls : GET and add to render (this.state parameters ?)
     },
     render: function() {
         return (
             <div className="device">
-                <h1>{ this.props.id }</h1>
-                <Tiraid data={ this.props.tiraid } />
-                <p>url : <a target="_blank" href="{ this.props.links.url }">{ this.props.links.url }</a></p>
-                <p>href : <a target="_blank" href="{ this.props.links.href }">{ this.props.links.href }</a></p>
+                <h1>{ this.props.data.id }</h1>
+                <Tiraid data={ this.props.data.tiraid } />
+                <p>url : <MetaData url={ this.props.data.url } /></p>
+                <p>href : <a target="_blank" className="btn" href={ this.props.href }>API</a></p>
             </div>
         );
+    }
+});
+
+var MetaData = React.createClass({
+    getDefaultProps: function() {
+        return {
+            'url' : "http://www.hyperlocalcontext.com/id/xxxxxxxxxxxxxxxx"
+        }
+    },
+    render: function() {
+        return (
+            <button className="btn" data-url={ this.props.url }>Meta Data</button>
+        )
     }
 });
 
 var Tiraid = React.createClass({
     getDefaultProps: function() {
         return { 
-            identifier: {
-                type: "EUI-64",
-                value: "001bc50940100069",
-                flags: {
-                    transmissionCount: 0
+            "identifier": {
+                "type": "EUI-64",
+                "value": "001bc50940100069",
+                "flags": {
+                    "transmissionCount": 0
                 }
             },
-            timestamp: "2015-03-02T20:10:41.338Z",
-            radioDecodings: [
+            "timestamp": "2015-03-02T20:10:41.338Z",
+            "radioDecodings": [
                 {
-                    rssi: 111,
-                    identifier: {
-                        type: "EUI-64",
-                        value: "001bc5094080001a"
+                    "rssi": 111,
+                    "identifier": {
+                        "type": "EUI-64",
+                        "value": "001bc5094080001a"
                     }
                 }
             ]
         };
     },
     render: function() {
-        return (<div className="tiraid">
-        <div>
-            { this.props.identifier.type } - { this.props.identifier.value }
+        return (
+        <div className="tiraid">
+            <div>
+                { this.props.identifier.type } - { this.props.identifier.value }
+            </div>
+            <div>
+                <h5>
+                    <img className="icon" src="http://context.reelyactive.com/images/context-identification.png" />
+                    ID Details
+                </h5>
+                <p>{ this.props.identifier.flags }</p>
+            </div>
+            <div>
+                <h5>
+                    <img className="icon" src="http://context.reelyactive.com/images/context-time.png" />
+                    Timestamp Details
+                </h5>
+                <p>{ this.props.timestamp }</p>
+            </div>
+            <div>
+                <h5>
+                    <img className="icon" src="http://context.reelyactive.com/images/context-location.png" />
+                    Location Details
+                </h5>
+                <RadioDecodings data={ this.props.radioDecodings } />
+            </div>
         </div>
-        <div>
-            <h5>
-                <img className="icon" src="http://context.reelyactive.com/images/context-identification.png" />
-                ID Details
-            </h5>
-            <p>{ this.props.identifier.flags }</p>
-        </div>
-        <div>
-            <h5>
-                <img className="icon" src="http://context.reelyactive.com/images/context-time.png" />
-                Timestamp Details
-            </h5>
-            <p>{ this.props.timestamp }</p>
-        </div>
-        <div>
-            <h5>
-                <img className="icon" src="http://context.reelyactive.com/images/context-location.png" />
-                Location Details
-            </h5>
-            <p>{ this.props.radioDecodings }</p>
-        </div></div>);
+        );
+    }
+});
+
+var RadioDecodings = React.createClass({
+    getDefaultProps: function() {
+        return [];
+    },
+    render: function() {
+        if( this.props.data.length > 1 ){
+            var nodes = this.props.data.map(
+                function( radioDecoding ){
+                    return (<RadioDecoding data={ radioDecoding } />);
+                }
+            );
+        } else {
+            var nodes = (<RadioDecoding data={ this.props.data[0] } />);
+        }
+        return nodes
+    }
+});
+
+var RadioDecoding = React.createClass({
+    getDefaultProps: function() {
+        return {};
+    },
+    render: function() {
+        console.log( this.props.data );
+        return (
+            <div>
+                <p>RSSI: { this.props.data.rssi }</p>
+                <p>ID: { this.props.data.identifier.type } - { this.props.data.identifier.value }</p>
+            </div>
+        )
     }
 });
 
 var Person = React.createClass({
     getDefaultProps: function() {
         return {
-              "@id": "http://person",
-              "@type": "Person",
-              "name": "John Doe",
-              "owns": "http://product",
-              "email": "john@reelyactive.com",
-              "image": "http://something.com/JohnDoe.jpg",
-              "alumniOf": "UCAM"
+            "@id": "http://person",
+            "@type": "Person",
+            "name": "John Doe",
+            "owns": [
+                {
+                  "@id": "productdb:iphone5.html",
+                  "@type": "schema:Product",
+                  "schema:productID": "mac:01:23:45:67:89:ab"
+                },
+                {
+                  "@id": "productdb:DasKapital.html",
+                  "@type": "schema:Product",
+                  "schema:productID": "mac:01:23:45:67:89:ab"
+                }
+            ],
+            "email": "john@reelyactive.com",
+            "image": "http://something.com/JohnDoe.jpg",
+            "alumniOf": "XXXXXXXXXXX"
         }
     },
     render: function() {
-        var extra;
-        //if( this.props.length > this.getDefaultProps.length ){
-        //      Generate default layout to put in extra for the additional params
-        //}
-        return (
-        <div className="person">
+        var alumni;
+        if ( this.props.alumniOf ){
+            alumni = (<p>Alumni of { this.props.alumniOf }</p>);
+        }
+        var productsNodes = this.props.owns.map( function(product) {
+            return (<p>Owns: <Product data={ product } /></p>);
+        });
+        return (<div className="person">
             <h1>
                 { this.props.name }
             </h1>
             <div>
                 <img className="icon" src={this.props.image} />
                 <p>Contact at { this.props.email }</p>
-                <p>Alumni of { this.props.alumniOf }</p>  
-                <p>Owns : <Product url={ this.props.owns } /></p>  
-                { extra }
+                { alumni }
+                { productsNodes }  
             </div>
-        </div>
-        );
+        </div>);
     }
 });
 
@@ -152,32 +234,15 @@ var Product = React.createClass({
         }
     },
     render: function() {
-        return (
-        <div className="product">
-            <h1>
-                Product : { this.props.model }
-            </h1>
+        return (<div className="product">
+            <h1>Product : { this.props.model }</h1>
             <p>Manufacterer : { this.props.manufacturer }</p>  
-        </div>
-        );
+        </div>);
     }
 });
 
 React.render(
-  <Device>
-  </Device>,
+  <HLC url='test.json' />,
   document.getElementById('device')
-);
-
-React.render(
-  <Person>
-  </Person>,
-  document.getElementById('person')
-);
-
-React.render(
-  <Tiraid>
-  </Tiraid>,
-  document.getElementById('tiraid')
 );
 
