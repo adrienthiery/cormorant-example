@@ -1,10 +1,52 @@
-<div>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title> reelyActive: Hyperlocal Context </title>
+        <link rel="stylesheet" href="style/main.css">
+        <script src="js/jquery.min.js"></script>
+    </head>
+    <body>
         <div id="search">
             <a href='.'><img id="logo" src="images/logo.png"></a>
             <input type='text' id='searchLinkKey' class="large" placeholder="Put an url (with http://), an id or a place name here" /><button id='searchLinkButton'>Search</button>
             <p>or</p>
-            <textarea id='searchJSONKey' class="large">Put your JSON code here</textarea><button id='searchJSONButton'>Search</button>
-            <div id='content'>
-            </div>
+            <textarea id='searchJSONKey' class="large" placeholder="Put your JSON code here"></textarea><button id='searchJSONButton'>Search</button>
         </div>
-    <footer><a href="admin"> Admin interface </a> &nbsp; | &nbsp;  Learn more at <a href="http://context.reelyactive.com/context.html"> context.reelyactive.com </a> </footer>
+        <div id="content">
+        </div>
+        <footer><a href="admin"> Admin interface </a> &nbsp; | &nbsp;  Learn more at <a href="http://context.reelyactive.com/context.html"> context.reelyactive.com </a> </footer>
+        <script type='text/javascript'>
+            $('#searchLinkButton').on('click', function(e){
+                $('#search').addClass('searched');
+                var linkKey = $('#searchLinkKey')[0].value;
+                var iframe = $('<iframe></iframe>')
+                    .addClass('cormorant');
+                if( linkKey.indexOf( "http://" ) != -1 ){
+                    iframe.attr('src', 
+                        "iframe.html?url="+encodeURIComponent(linkKey)
+                    );
+                } else if( linkKey == "" ){ 
+                    iframe.attr('src', 
+                        "iframe.html?url=test.json"
+                    );
+                } else {
+                    iframe.attr('src', 
+                        "iframe.html?url="+encodeURIComponent("http://www.hyperlocalcontext.com/"+linkKey)
+                    );
+                }
+                $('#content').append( iframe );
+            });
+            $('#searchJSONButton').on('click', function(e){
+                $('#search').addClass('searched');
+                var jsonKey = $('#searchJSONKey').val();
+                var iframe = $('<iframe></iframe>')
+                    .addClass('cormorant')
+                    .attr('src', 
+                        "iframe.html?data="+encodeURIComponent(jsonKey)
+                    );
+                $('#content').append( iframe );
+            });
+        </script>
+    </body>
+</html>
+

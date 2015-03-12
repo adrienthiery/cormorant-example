@@ -1,21 +1,28 @@
 var HLC = React.createClass({
     getDefaultProps: function(){
-        return {};
+        return {
+            'url' : getUrlVars()['url']
+        };
     },
     getInitialState: function() {
         return {data: {}};
     },
     componentDidMount: function() {
-    $.ajax({
-        url: this.props.url,
-        dataType: 'json',
-        success: function(data) {
+        if( getUrlVars()['data'] != undefined ){
+            data = JSON.parse(decodeURIComponent(getUrlVars()['data']));
             this.setState({data: data});
-        }.bind(this),
-        error: function(xhr, status, err) {
-            console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });
+        } else if( this.props.url != undefined ){
+            $.ajax({
+                url: this.props.url,
+                dataType: 'json',
+                success: function(data) {
+                    this.setState({data: data});
+                }.bind(this),
+                error: function(xhr, status, err) {
+                    console.error(this.props.url, status, err.toString());
+                }.bind(this)
+            });
+        }
     },
     render: function() {
         return ( <Devices data={ this.state.data.devices } /> );
@@ -85,10 +92,31 @@ var MetaData = React.createClass({
             'url' : "http://www.hyperlocalcontext.com/id/xxxxxxxxxxxxxxxx"
         }
     },
+    componentDidMount: function(){
+        var theUrl = this.props.url;
+        var theComponent = this;
+        $('.meta-data').on('click', function(e){
+            $.ajax({
+                url: theUrl,
+                dataType: 'json',
+                success: function(data) {
+                    theComponent.setState({data: data});
+                    React.render(
+                      <Person data={ theComponent.state.data.person } />,
+                      document.getElementById('person')
+                    );
+                }.bind(this),
+                error: function(xhr, status, err) {
+                    console.error(this.props.url, status, err.toString());
+                }.bind(this)
+            });
+        });
+    },
     render: function() {
-        return (
-            <button className="btn" data-url={ this.props.url }>Meta Data</button>
-        )
+        return (<div>
+            <button className="btn meta-data" data-url={ this.props.url }>Meta Data</button>
+            <div id="person"></div>
+        </div>)
     }
 });
 
@@ -169,7 +197,6 @@ var RadioDecoding = React.createClass({
         return {};
     },
     render: function() {
-        console.log( this.props.data );
         return (
             <div>
                 <p>RSSI: { this.props.data.rssi }</p>
@@ -189,11 +216,13 @@ var Person = React.createClass({
                 {
                   "@id": "productdb:iphone5.html",
                   "@type": "schema:Product",
+                  "model": "iphone5",
                   "schema:productID": "mac:01:23:45:67:89:ab"
                 },
                 {
                   "@id": "productdb:DasKapital.html",
                   "@type": "schema:Product",
+                  "model": "Das Kapital v1",
                   "schema:productID": "mac:01:23:45:67:89:ab"
                 }
             ],
@@ -208,16 +237,17 @@ var Person = React.createClass({
             alumni = (<p>Alumni of { this.props.alumniOf }</p>);
         }
         var productsNodes = this.props.owns.map( function(product) {
-            return (<p>Owns: <Product data={ product } /></p>);
+            return (<p><Product data={ product } /></p>);
         });
         return (<div className="person">
             <h1>
-                { this.props.name }
+                { this.props.data.name }
             </h1>
             <div>
                 <img className="icon" src={this.props.image} />
                 <p>Contact at { this.props.email }</p>
                 { alumni }
+                <p>Owns:</p>
                 { productsNodes }  
             </div>
         </div>);
@@ -227,22 +257,27 @@ var Person = React.createClass({
 var Product = React.createClass({
     getDefaultProps: function() {
         return {
-            "@id": "http://product",
-            "@type": "Product",
-            "model": "RA-T411",
-            "manufacturer": "http://reelyactive.com/???" 
+            "data" : {
+                "@id": "http://product",
+                "@type": "Product",
+                "model": "RA-T411",
+                "manufacturer": "http://reelyactive.com/???" 
+            }
         }
     },
     render: function() {
+        var manufacturer;
+        if( this.props.data.manufacturer )
+            manufacturer  = (<p>Manufacterer : { this.props.data.manufacturer }</p>);
         return (<div className="product">
-            <h1>Product : { this.props.model }</h1>
-            <p>Manufacterer : { this.props.manufacturer }</p>  
+            <h1>Product : { this.props.data.model }</h1>
+            { manufacturer }
         </div>);
     }
 });
 
 React.render(
-  <HLC url='test.json' />,
+  <HLC />,
   document.getElementById('content')
 );
 

@@ -48,3 +48,12 @@ String.prototype.chunk = function(n) {
 function renderMACAddress( address ){
     return address.chunk( 2 ).join( ':' );
 }
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
