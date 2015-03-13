@@ -116,9 +116,11 @@ footer {
 }
 
 .device, .person, .tiraid, .product {
-    border: solid 1px #ddd;
+    border: solid 1px;
     font-size: 0.8em;
     padding: 5px;
+    background-color: white;
+    margin: 5px;
 }
 
 .device + .device {
@@ -126,20 +128,32 @@ footer {
 }
 
 .device .half-width {
-    border: solid 1px #ccc;
+    border: solid 1px #CCCCCC;
 }
 
 .icon {
     max-height: 30px;
 }
 
-.device {
-    background: #FFAC71;
+.device.colored {
+    border-color: #FFAC71;
+    background-color: #FFDFA6;
 }
 
-.person {
-    background: #6FB8FF;
+.person.colored {
+    border-color: #BFD4FF;
+    background-color: #BFD4FF;
 } 
+
+.product.colored {
+    border-color: #FFFF82;
+    background-color: #FFFF82;
+}
+
+.tiraid.colored {
+    border-color: #CCCCCC;
+    background-color: #EEEEEE;
+}
 
 .half-width p {
     background-color: #ccc;

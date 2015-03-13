@@ -57,3 +57,7 @@ function getUrlVars() {
     return vars;
 }
 
+$( '#color' ).on( 'click', function(){
+    $( '.entity' ).toggleClass( 'colored' );
+});
+

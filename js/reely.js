@@ -29,8 +29,6 @@ var HLC = React.createClass({
     }
 });
 
-// Add mechanics of put JSON or Url in inputs => render
-// + Put url as URL parameters => render
 var Devices = React.createClass({
     getDefaultProps: function() {
         return {
@@ -76,11 +74,11 @@ var Device = React.createClass({
     },
     render: function() {
         return (
-            <div className="device">
+            <div title="Device" className="device entity">
                 <h1>{ this.props.data.id }</h1>
                 <Tiraid data={ this.props.data.tiraid } />
                 <p>url : <MetaData url={ this.props.data.url } /></p>
-                <p>href : <a target="_blank" className="btn" href={ this.props.href }>API</a></p>
+                <p>href : <a target="_blank" className="btn" href={ this.props.data.href }>API</a></p>
             </div>
         );
     }
@@ -144,7 +142,7 @@ var Tiraid = React.createClass({
     },
     render: function() {
         return (
-        <div className="tiraid">
+        <div title="Tiraid" className="tiraid entity">
             <div>
                 { this.props.identifier.type } - { this.props.identifier.value }
             </div>
@@ -239,7 +237,7 @@ var Person = React.createClass({
         var productsNodes = this.props.owns.map( function(product) {
             return (<p><Product data={ product } /></p>);
         });
-        return (<div className="person">
+        return (<div title="Person" className="person entity">
             <h1>
                 { this.props.data.name }
             </h1>
@@ -269,7 +267,7 @@ var Product = React.createClass({
         var manufacturer;
         if( this.props.data.manufacturer )
             manufacturer  = (<p>Manufacterer : { this.props.data.manufacturer }</p>);
-        return (<div className="product">
+        return (<div title="Product" className="product entity">
             <h1>Product : { this.props.data.model }</h1>
             { manufacturer }
         </div>);
