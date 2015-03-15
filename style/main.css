@@ -177,12 +177,18 @@ input.large, textarea.large {
     clear: both;
 }
 
-identity-layout img {
+.person img, .device img {
     max-width: 30%;
     width: auto;
     height: auto;
     float: left;
     margin: 5px;
+    max-height: 150px;
+}
+
+img.icon {
+    clear: both;
+    max-height: 2em;
 }
 
 .card {
@@ -222,6 +228,7 @@ pre {
     font-size: 2em;
     display: inline-block;
     margin-right: 5px;
+    vertical-align: bottom;
 }
 .social {
     font-family: 'EntypoSocial';
