@@ -178,6 +178,7 @@ input.large, textarea.large {
 }
 
 .person img, .device img {
+    border-radius: 75px;
     max-width: 30%;
     width: auto;
     height: auto;
