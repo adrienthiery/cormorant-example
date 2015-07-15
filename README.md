@@ -1,2 +1,2 @@
 # cormorant
-An angular html wrapper for ReelyActive HyperLocalContext exploration.
+An AngularJS or ReactJS html wrapper for ReelyActive HyperLocalContext exploration.

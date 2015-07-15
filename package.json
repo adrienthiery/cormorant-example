@@ -1,0 +1,32 @@
+{
+  "name": "cormorant",
+  "author": "Adrien Thiery <adrien@thiery.io>",
+  "description": "A wrapper for react components representing Things of the IOT",
+  "keywords": [
+    "reelyActive",
+    "API",
+    "IoT"
+  ],
+  "version": "0.0.2",
+  "engines": {
+    "node": "^0.10.0"
+  },
+  "main": "js/cormorant.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adrienthiery/cormorant.git"
+  },
+  "dependencies": {
+    "react": "*"
+  },
+  "devDependencies": {
+    "react-tools": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/adrienthiery/cormorant/issues"
+  },
+  "contributors": [
+    { "name": "Adrient Thiery" }
+  ],
+  "license": "MIT"
+}
