@@ -1,3 +1,6 @@
+require('js/jquery.min.js');
+React = require('react');
+
 var HLC = React.createClass({
     getDefaultProps: function(){
         return {
