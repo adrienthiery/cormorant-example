@@ -1,7 +1,7 @@
 {
-  "name": "cormorant",
+  "name": "cormorant-example",
   "author": "Adrien Thiery <adrien@thiery.io>",
-  "description": "A wrapper for react components representing Things of the IOT",
+  "description": "a test website for cormorant",
   "keywords": [
     "reelyActive",
     "API",
@@ -11,17 +11,19 @@
   "engines": {
     "node": "^0.10.0"
   },
-  "main": "js/cormorant.js",
+  "main": "index.html",
   "repository": {
     "type": "git",
-    "url": "https://github.com/adrienthiery/cormorant.git"
+    "url": "https://github.com/adrienthiery/cormorant-example.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "bower": "~1.4.1"
+  },
   "devDependencies": {
     "react-tools": "*"
   },
   "bugs": {
-    "url": "https://github.com/adrienthiery/cormorant/issues"
+    "url": "https://github.com/adrienthiery/cormorant-example/issues"
   },
   "contributors": [
     {

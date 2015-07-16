@@ -1,0 +1,24 @@
+{
+  "name": "cormorant-example",
+  "version": "0.0.0",
+  "homepage": "null",
+  "authors": [
+    "Adrien Thiery <adrien.thiery@gmail.com>"
+  ],
+  "description": "a test website for cormorant",
+  "main": "index.html",
+  "keywords": [
+    "test"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.13.3"
+  }
+}
