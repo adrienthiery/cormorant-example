@@ -11,12 +11,16 @@
   "owns": [
     { 
       "@id": "productdb:iphone5.html",
+      "brand": "Apple",
+      "name": "Iphone 5",
       "@type": "Product",
       "productID": "mac:01:23:45:67:89:ab"
     },
     { 
-      "@id": "productdb:iphone3.html",
+      "@id": "productdb:mbp.html",
       "@type": "Product",
+      "brand": "Apple",
+      "name": "Macbook Pro",
       "productID": "mac:01:23:45:67:89:ab"
     }
   ]

@@ -8,7 +8,7 @@ tools, getReactComponent){
     myJSON = JSON.parse( myJSON );
     var component = getReactComponent(myJSON);
     React.render(
-      React.createElement(component, myJSON),
+      React.createElement(component, {props: myJSON}),
       document.getElementById('content')
     );
   }, 500);
