@@ -1,7 +1,7 @@
 React = require(['../bower_components/react/react', '../cormorant/tools', '../cormorant/main'], function(React,
 tools, getReactComponent){
   var req = new XMLHttpRequest();
-  req.open( "GET", 'data/test-compacted.json' );
+  req.open( "GET", 'data/test-owns.json' );
   req.send();
   setTimeout( function(){
     var myJSON = req.response;

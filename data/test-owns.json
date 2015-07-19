@@ -1,0 +1,23 @@
+{
+  "@context": "http://schema.org/",  
+  "@type":"Person",
+  "image": "http://s1.zerochan.net/Pikachu.600.1660195.jpg",
+  "nationality": "AU",
+  "givenName": "Barn",
+  "familyName": "Owl",
+  "gender": "male",
+  "worksFor": "ReelyActive",
+  "url": "http://mywebsite.com/",
+  "owns": [
+    { 
+      "@id": "productdb:iphone5.html",
+      "@type": "Product",
+      "productID": "mac:01:23:45:67:89:ab"
+    },
+    { 
+      "@id": "productdb:iphone3.html",
+      "@type": "Product",
+      "productID": "mac:01:23:45:67:89:ab"
+    }
+  ]
+}
